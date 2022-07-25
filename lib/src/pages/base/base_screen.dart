@@ -32,7 +32,12 @@ class _BaseScreenState extends State<BaseScreen> {
         currentIndex: currentIndex,
         onTap: (index) => setState(() {
           currentIndex = index;
-          pageController.jumpToPage(index);
+          // pageController.jumpToPage(index);
+          pageController.animateToPage(
+            index,
+            duration: const Duration(milliseconds: 700),
+            curve: Curves.bounceIn,
+          );
         }),
         backgroundColor: Colors.green,
         selectedItemColor: Colors.white,

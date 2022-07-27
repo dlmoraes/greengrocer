@@ -1,10 +1,10 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:greengrocer/src/pages/cart/components/app_name_widget.dart';
 import 'package:greengrocer/src/pages/commom_widgets/custom_text_field.dart';
-import 'package:greengrocer/src/pages/auth/sign_up_screen.dart';
-import 'package:greengrocer/src/pages/base/base_screen.dart';
 import 'package:greengrocer/src/config/custom_colors.dart';
+import 'package:greengrocer/src/pages_routes/app_pages.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -89,12 +89,7 @@ class SignInScreen extends StatelessWidget {
                       SizedBox(
                         height: 50,
                         child: ElevatedButton(
-                          onPressed: () =>
-                              Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (context) => const BaseScreen(),
-                            ),
-                          ),
+                          onPressed: () => Get.offNamed(PagesRoutes.baseRoute),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: CustomColors.customSwatchColor,
                             shape: RoundedRectangleBorder(
@@ -152,11 +147,7 @@ class SignInScreen extends StatelessWidget {
                       SizedBox(
                         height: 50,
                         child: OutlinedButton(
-                          onPressed: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => SignUpScreen(),
-                            ),
-                          ),
+                          onPressed: () => Get.toNamed(PagesRoutes.signUpRoute),
                           style: OutlinedButton.styleFrom(
                             side: const BorderSide(
                               width: 2,

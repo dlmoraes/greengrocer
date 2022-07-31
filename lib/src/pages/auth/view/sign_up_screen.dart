@@ -91,7 +91,9 @@ class SignUpScreen extends StatelessWidget {
                           SizedBox(
                             height: 50,
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                _formKey.currentState!.validate();
+                              },
                               style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(18),

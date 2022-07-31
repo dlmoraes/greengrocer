@@ -30,7 +30,9 @@ String? nameValidator(String? name) {
 String? phoneValidator(String? phone) {
   if (phone == null || phone.isEmpty) return 'Informe o número do seu celular!';
 
-  if (!phone.isPhoneNumber) return 'Digite um telefone válido!';
+  if (phone.length < 14 || !phone.isPhoneNumber) {
+    return 'Digite um telefone válido!';
+  }
 
   return null;
 }

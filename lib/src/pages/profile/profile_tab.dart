@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:greengrocer/src/pages/commom_widgets/custom_text_field.dart';
 import 'package:greengrocer/src/config/app_data.dart' as appData;
+import 'package:greengrocer/src/pages/auth/controller/auth_controller.dart';
+import 'package:greengrocer/src/pages/commom_widgets/custom_text_field.dart';
 
 class ProfileTab extends StatefulWidget {
   const ProfileTab({Key? key}) : super(key: key);
@@ -10,6 +11,8 @@ class ProfileTab extends StatefulWidget {
 }
 
 class _ProfileTabState extends State<ProfileTab> {
+  final authController = AuthController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +21,7 @@ class _ProfileTabState extends State<ProfileTab> {
         actions: [
           IconButton(
             icon: const Icon(Icons.logout),
-            onPressed: () {},
+            onPressed: () => authController.signOut(),
           ),
         ],
       ),

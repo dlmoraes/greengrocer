@@ -6,7 +6,7 @@ class CustomTextField extends StatefulWidget {
   final String label;
   final bool isSecret;
   final List<TextInputFormatter>? inputFormatters;
-  final TextInputType? inputType;
+  final TextInputType? textInputType;
   final String? initialValue;
   final bool readOnly;
   final String? Function(String?)? validator;
@@ -18,7 +18,7 @@ class CustomTextField extends StatefulWidget {
     required this.label,
     this.isSecret = false,
     this.inputFormatters,
-    this.inputType,
+    this.textInputType,
     this.initialValue,
     this.readOnly = false,
     this.validator,
@@ -47,7 +47,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         readOnly: widget.readOnly,
         initialValue: widget.initialValue,
         inputFormatters: widget.inputFormatters,
-        keyboardType: widget.inputType,
+        keyboardType: widget.textInputType,
         obscureText: isObscure,
         validator: widget.validator,
         decoration: InputDecoration(

@@ -1,8 +1,11 @@
 import 'package:get/get.dart';
 import 'package:greengrocer/src/models/category_model.dart';
+import 'package:greengrocer/src/models/item_model.dart';
 import 'package:greengrocer/src/pages/home/repository/home_repository.dart';
 import 'package:greengrocer/src/pages/home/result/home_result.dart';
 import 'package:greengrocer/src/services/utils_services.dart';
+
+const int itemsPerPage = 6;
 
 class HomeController extends GetxController {
   final homeRepository = HomeRepository();
@@ -26,6 +29,8 @@ class HomeController extends GetxController {
   void selectCategory(CategoryModel category) {
     currentCategory = category;
     update();
+
+    getAllProducts();
   }
 
   Future<void> getAllCategories() async {
@@ -43,6 +48,33 @@ class HomeController extends GetxController {
         if (allCategories.isEmpty) return;
 
         selectCategory(allCategories.first);
+      },
+      error: (message) {
+        utilsServices.showToast(
+          message: message,
+          isError: true,
+        );
+      },
+    );
+  }
+
+  Future<void> getAllProducts() async {
+    setLoading(true);
+
+    Map<String, dynamic> body = {
+      'page': currentCategory!.pagination,
+      'categoryId': currentCategory!.id,
+      'itemsPerPage': itemsPerPage,
+    };
+
+    HomeResult<ItemModel> result = await homeRepository.getAllProducts(body);
+
+    setLoading(false);
+
+    result.when(
+      success: (data) {
+        // update();
+        print(data);
       },
       error: (message) {
         utilsServices.showToast(

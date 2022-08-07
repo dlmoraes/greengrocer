@@ -8,11 +8,9 @@ class CartTile extends StatefulWidget {
   const CartTile({
     Key? key,
     required this.cartItem,
-    required this.remove,
   }) : super(key: key);
 
   final CartItemModel cartItem;
-  final Function(CartItemModel cartItem) remove;
 
   @override
   State<CartTile> createState() => _CartTileState();
@@ -30,7 +28,7 @@ class _CartTileState extends State<CartTile> {
       ),
       child: ListTile(
         // Imagem
-        leading: Image.asset(
+        leading: Image.network(
           widget.cartItem.item.imgUrl,
           height: 60,
           width: 60,
@@ -57,14 +55,7 @@ class _CartTileState extends State<CartTile> {
         trailing: QuantityWidget(
           value: widget.cartItem.quantity,
           suffixText: widget.cartItem.item.unit,
-          result: (quantity) {
-            setState(() {
-              widget.cartItem.quantity = quantity;
-              if (quantity == 0) {
-                widget.remove(widget.cartItem);
-              }
-            });
-          },
+          result: (quantity) {},
           isRemovable: true,
         ),
       ),

@@ -1,4 +1,3 @@
-import 'package:greengrocer/src/models/cart_item_model.dart';
 import 'package:greengrocer/src/models/item_model.dart';
 import 'package:greengrocer/src/models/order_model.dart';
 import 'package:greengrocer/src/models/user_model.dart';
@@ -75,20 +74,20 @@ List<String> categories = [
   'Cereais',
 ];
 
-List<CartItemModel> cartItems = [
-  CartItemModel(
-    item: apple,
-    quantity: 2,
-  ),
-  CartItemModel(
-    item: mango,
-    quantity: 1,
-  ),
-  CartItemModel(
-    item: guava,
-    quantity: 3,
-  ),
-];
+// List<CartItemModel> cartItems = [
+//   CartItemModel(
+//     item: apple,
+//     quantity: 2,
+//   ),
+//   CartItemModel(
+//     item: mango,
+//     quantity: 1,
+//   ),
+//   CartItemModel(
+//     item: guava,
+//     quantity: 3,
+//   ),
+// ];
 
 UserModel user = UserModel(
   name: 'João Pedro',
@@ -105,14 +104,14 @@ List<OrderModel> orders = [
     createdDateTime: DateTime.parse('2023-07-24 10:00:10.458'),
     overdueDateTime: DateTime.parse('2023-07-24 11:00:10.458'),
     items: [
-      CartItemModel(
-        item: apple,
-        quantity: 2,
-      ),
-      CartItemModel(
-        item: mango,
-        quantity: 2,
-      ),
+      // CartItemModel(
+      //   item: apple,
+      //   quantity: 2,
+      // ),
+      // CartItemModel(
+      //   item: mango,
+      //   quantity: 2,
+      // ),
     ],
     status: 'delivered',
     copyAndPaste: 'q1w2e3r4t5y6',
@@ -125,10 +124,10 @@ List<OrderModel> orders = [
     createdDateTime: DateTime.parse('2023-07-28 10:00:10.458'),
     overdueDateTime: DateTime.parse('2023-07-24 11:00:10.458'),
     items: [
-      CartItemModel(
-        item: guava,
-        quantity: 1,
-      ),
+      // CartItemModel(
+      //   item: guava,
+      //   quantity: 1,
+      // ),
     ],
     status: 'pending_payment',
     copyAndPaste: 'q1w2e3r4t5y6',

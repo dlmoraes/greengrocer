@@ -80,8 +80,6 @@ class CartController extends GetxController {
       final result = await changeItemQuantity(
           item: product, quantity: (product.quantity + quantity));
 
-      print(result);
-
       if (result) {
         cartItems[itemIndex].quantity += quantity;
       } else {

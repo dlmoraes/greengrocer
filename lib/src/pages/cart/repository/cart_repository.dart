@@ -28,4 +28,50 @@ class CartRepository {
       return CartResult.error('Ocorreu um erro ao buscar os itens do carrinho');
     }
   }
+
+  Future<bool> changeItemQuantity({
+    required String token,
+    required String cartItemId,
+    required int quantity,
+  }) async {
+    final result = await _httpManager.restRequest(
+      url: Endpoints.changeItemQuantity,
+      method: HttpMethods.post,
+      body: {
+        'cartItemId': cartItemId,
+        'quantity': quantity,
+      },
+      headers: {
+        'X-Parse-Session-Token': token,
+      },
+    );
+
+    return result.isEmpty;
+  }
+
+  Future<CartResult<String>> addItemToCart({
+    required String userId,
+    required String token,
+    required String productId,
+    required int quantity,
+  }) async {
+    final result = await _httpManager.restRequest(
+      url: Endpoints.addItemToCart,
+      method: HttpMethods.post,
+      body: {
+        'user': userId,
+        'productId': productId,
+        'quantity': quantity,
+      },
+      headers: {
+        'X-Parse-Session-Token': token,
+      },
+    );
+
+    if (result['result'] != null) {
+      return CartResult<String>.success(result['result']['id']);
+    } else {
+      return CartResult.error('Não foi possível adicionar o item no carrinho');
+    }
+  }
 }

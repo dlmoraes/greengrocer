@@ -58,6 +58,12 @@ class CartController extends GetxController {
     return result;
   }
 
+  int getCartTotalItems() {
+    return cartItems.isEmpty
+        ? 0
+        : cartItems.map((e) => e.quantity).reduce((a, b) => a + b);
+  }
+
   Future<void> getCartItems() async {
     final CartResult<List<CartItemModel>> result =
         await cartRepository.getCartItems(

@@ -17,6 +17,7 @@ OrderModel _$OrderModelFromJson(Map<String, dynamic> json) => OrderModel(
               .toList() ??
           [],
       status: json['status'] as String,
+      qtCodeImage: json['qtCodeImage'] as String,
       copyAndPaste: json['copiaecola'] as String,
       total: (json['total'] as num).toDouble(),
     );
@@ -28,6 +29,7 @@ Map<String, dynamic> _$OrderModelToJson(OrderModel instance) =>
       'due': instance.overdueDateTime.toIso8601String(),
       'items': instance.items,
       'status': instance.status,
+      'qtCodeImage': instance.qtCodeImage,
       'copiaecola': instance.copyAndPaste,
       'total': instance.total,
     };

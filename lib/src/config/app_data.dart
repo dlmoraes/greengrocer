@@ -99,38 +99,38 @@ UserModel user = UserModel(
 
 List<OrderModel> orders = [
   // Pedido 1
-  OrderModel(
-    id: 'asd6a54da6s2d1',
-    createdDateTime: DateTime.parse('2023-07-24 10:00:10.458'),
-    overdueDateTime: DateTime.parse('2023-07-24 11:00:10.458'),
-    items: [
-      // CartItemModel(
-      //   item: apple,
-      //   quantity: 2,
-      // ),
-      // CartItemModel(
-      //   item: mango,
-      //   quantity: 2,
-      // ),
-    ],
-    status: 'delivered',
-    copyAndPaste: 'q1w2e3r4t5y6',
-    total: 16,
-  ),
+  // OrderModel(
+  //   id: 'asd6a54da6s2d1',
+  //   createdDateTime: DateTime.parse('2023-07-24 10:00:10.458'),
+  //   overdueDateTime: DateTime.parse('2023-07-24 11:00:10.458'),
+  //   items: [
+  //     // CartItemModel(
+  //     //   item: apple,
+  //     //   quantity: 2,
+  //     // ),
+  //     // CartItemModel(
+  //     //   item: mango,
+  //     //   quantity: 2,
+  //     // ),
+  //   ],
+  //   status: 'delivered',
+  //   copyAndPaste: 'q1w2e3r4t5y6',
+  //   total: 16,
+  // ),
 
   // Pedido 2
-  OrderModel(
-    id: 'a65s4d6a2s1d6a5s',
-    createdDateTime: DateTime.parse('2023-07-28 10:00:10.458'),
-    overdueDateTime: DateTime.parse('2023-07-24 11:00:10.458'),
-    items: [
-      // CartItemModel(
-      //   item: guava,
-      //   quantity: 1,
-      // ),
-    ],
-    status: 'pending_payment',
-    copyAndPaste: 'q1w2e3r4t5y6',
-    total: 11.5,
-  )
+  // OrderModel(
+  //   id: 'a65s4d6a2s1d6a5s',
+  //   createdDateTime: DateTime.parse('2023-07-28 10:00:10.458'),
+  //   overdueDateTime: DateTime.parse('2023-07-24 11:00:10.458'),
+  //   items: [
+  //     // CartItemModel(
+  //     //   item: guava,
+  //     //   quantity: 1,
+  //     // ),
+  //   ],
+  //   status: 'pending_payment',
+  //   copyAndPaste: 'q1w2e3r4t5y6',
+  //   total: 11.5,
+  // )
 ];

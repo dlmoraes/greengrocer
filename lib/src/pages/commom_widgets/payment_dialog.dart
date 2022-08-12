@@ -1,7 +1,7 @@
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:greengrocer/src/models/order_model.dart';
 import 'package:greengrocer/src/services/utils_services.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 
 class PaymentDialog extends StatelessWidget {
   PaymentDialog({
@@ -39,10 +39,12 @@ class PaymentDialog extends StatelessWidget {
                 ),
 
                 // QR Code
-                QrImage(
-                  data: "4ds6a54d6a556c15fds46sdf16sda",
-                  version: QrVersions.auto,
-                  size: 200.0,
+                Image.memory(
+                  utilsServices.decodeQrCodeImage(
+                    order.qtCodeImage,
+                  ),
+                  height: 200,
+                  width: 200,
                 ),
                 // Vencimento
                 Padding(
@@ -73,7 +75,12 @@ class PaymentDialog extends StatelessWidget {
                         width: 2,
                         color: Colors.green,
                       )),
-                  onPressed: () {},
+                  onPressed: () {
+                    FlutterClipboard.copy(order.copyAndPaste);
+                    utilsServices.showToast(
+                      message: 'Código copiado',
+                    );
+                  },
                   icon: const Icon(
                     Icons.copy,
                     size: 15,

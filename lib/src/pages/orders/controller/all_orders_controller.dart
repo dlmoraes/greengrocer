@@ -2,12 +2,12 @@ import 'package:get/get.dart';
 import 'package:greengrocer/src/models/order_model.dart';
 import 'package:greengrocer/src/pages/auth/controller/auth_controller.dart';
 import 'package:greengrocer/src/pages/orders/result/orders_result.dart';
-import 'package:greengrocer/src/pages/orders/view/orders_repository.dart';
+import 'package:greengrocer/src/pages/orders/repository/orders_repository.dart';
 import 'package:greengrocer/src/services/utils_services.dart';
 
 class AllOrdersController extends GetxController {
   List<OrderModel> allOrders = [];
-  final ordersRepository = OrderRepository();
+  final ordersRepository = OrdersRepository();
   final authController = Get.find<AuthController>();
   final utilsServices = UtilsServices();
 

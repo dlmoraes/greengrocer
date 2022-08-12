@@ -41,7 +41,7 @@ class PaymentDialog extends StatelessWidget {
                 // QR Code
                 Image.memory(
                   utilsServices.decodeQrCodeImage(
-                    order.qtCodeImage,
+                    order.qrCodeImage,
                   ),
                   height: 200,
                   width: 200,

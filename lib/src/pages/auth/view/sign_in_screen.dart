@@ -121,10 +121,7 @@ class SignInScreen extends StatelessWidget {
                                             email: email,
                                             password: password,
                                           );
-                                        } else {
-                                          print('Algum campo não está válido');
                                         }
-                                        //Get.offNamed(PagesRoutes.baseRoute);
                                       },
                                 style: ElevatedButton.styleFrom(
                                   shape: RoundedRectangleBorder(

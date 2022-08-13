@@ -21,8 +21,12 @@ class _ProfileTabState extends State<ProfileTab> {
         title: const Text('Perfil do usuário'),
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () => authController.signOut(),
+            onPressed: () {
+              authController.signOut();
+            },
+            icon: const Icon(
+              Icons.logout,
+            ),
           ),
         ],
       ),
@@ -30,36 +34,40 @@ class _ProfileTabState extends State<ProfileTab> {
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.fromLTRB(16, 32, 16, 16),
         children: [
-          //Email
+          // Email
           CustomTextField(
-            icon: Icons.email,
-            label: 'E-mail',
-            initialValue: authController.user.email,
             readOnly: true,
+            initialValue: authController.user.email,
+            icon: Icons.email,
+            label: 'Email',
           ),
+
           // Nome
           CustomTextField(
+            readOnly: true,
+            initialValue: authController.user.name,
             icon: Icons.person,
             label: 'Nome',
-            initialValue: authController.user.name,
-            readOnly: true,
           ),
+
           // Celular
           CustomTextField(
+            readOnly: true,
+            initialValue: authController.user.phone,
             icon: Icons.phone,
             label: 'Celular',
-            initialValue: authController.user.phone,
-            readOnly: true,
           ),
+
           // CPF
           CustomTextField(
+            readOnly: true,
+            initialValue: authController.user.cpf,
             icon: Icons.file_copy,
             label: 'CPF',
             isSecret: true,
-            initialValue: authController.user.cpf,
-            readOnly: true,
           ),
-          // Botão para atualizar senha
+
+          // Botão para atualizar a senha
           SizedBox(
             height: 50,
             child: OutlinedButton(
@@ -71,13 +79,10 @@ class _ProfileTabState extends State<ProfileTab> {
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
-              onPressed: () async {
-                bool? result = await updatePassword();
-                print(result);
+              onPressed: () {
+                updatePassword();
               },
-              child: const Text(
-                'Atualizar senha',
-              ),
+              child: const Text('Atualizar senha'),
             ),
           ),
         ],
@@ -86,6 +91,7 @@ class _ProfileTabState extends State<ProfileTab> {
   }
 
   Future<bool?> updatePassword() {
+    final currentPasswordController = TextEditingController();
     final newPasswordController = TextEditingController();
     final formKey = GlobalKey<FormState>();
 
@@ -99,21 +105,18 @@ class _ProfileTabState extends State<ProfileTab> {
           child: Stack(
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 20,
-                  horizontal: 16,
-                ),
+                padding: const EdgeInsets.all(16),
                 child: Form(
                   key: formKey,
                   child: Column(
-                    mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
                       // Titulo
                       const Padding(
-                        padding: EdgeInsets.symmetric(vertical: 20),
+                        padding: EdgeInsets.symmetric(vertical: 12),
                         child: Text(
-                          'Atualize sua senha',
+                          'Atualização de senha',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 18,
@@ -123,55 +126,68 @@ class _ProfileTabState extends State<ProfileTab> {
                       ),
 
                       // Senha atual
-                      const CustomTextField(
+                      CustomTextField(
+                        controller: currentPasswordController,
+                        isSecret: true,
                         icon: Icons.lock,
                         label: 'Senha atual',
-                        isSecret: true,
                         validator: passwordValidator,
                       ),
 
                       // Nova senha
                       CustomTextField(
                         controller: newPasswordController,
+                        isSecret: true,
                         icon: Icons.lock_outline,
                         label: 'Nova senha',
-                        isSecret: true,
                         validator: passwordValidator,
                       ),
 
-                      // Confirmação de nova senha
+                      // Confirmação nova senha
                       CustomTextField(
-                          icon: Icons.lock_outline,
-                          label: 'Confirmar nova senha',
-                          isSecret: true,
-                          validator: (password) {
-                            final result = passwordValidator(password);
+                        isSecret: true,
+                        icon: Icons.lock_outline,
+                        label: 'Confirmar nova senha',
+                        validator: (password) {
+                          final result = passwordValidator(password);
 
-                            if (result != null) {
-                              return result;
-                            }
+                          if (result != null) {
+                            return result;
+                          }
 
-                            if (password != newPasswordController.text) {
-                              return 'As senhas não conferem';
-                            }
+                          if (password != newPasswordController.text) {
+                            return 'As senhas não são equivalentes';
+                          }
 
-                            return null;
-                          }),
+                          return null;
+                        },
+                      ),
+
+                      // Botão de confirmação
                       SizedBox(
                         height: 45,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                          ),
-                          onPressed: () {
-                            formKey.currentState!.validate();
-                          },
-                          child: const Text(
-                            'Atualizar',
-                          ),
-                        ),
+                        child: Obx(() => ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                              onPressed: authController.isLoading.value
+                                  ? null
+                                  : () {
+                                      if (formKey.currentState!.validate()) {
+                                        authController.changePassword(
+                                          currentPassword:
+                                              currentPasswordController.text,
+                                          newPassword:
+                                              newPasswordController.text,
+                                        );
+                                      }
+                                    },
+                              child: authController.isLoading.value
+                                  ? const CircularProgressIndicator()
+                                  : const Text('Atualizar'),
+                            )),
                       ),
                     ],
                   ),
@@ -181,10 +197,12 @@ class _ProfileTabState extends State<ProfileTab> {
                 top: 5,
                 right: 5,
                 child: IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
                   icon: const Icon(Icons.close),
-                  onPressed: () => Navigator.of(context).pop(false),
                 ),
-              )
+              ),
             ],
           ),
         );
